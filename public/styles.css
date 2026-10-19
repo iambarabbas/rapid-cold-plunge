@@ -378,7 +378,7 @@ html,body{margin:0;background:#0D0A07;color:#F1E6D4;-webkit-font-smoothing:antia
 .h5:hover{background-color:#0D0A07;color:#F1E6D4}
 .h6:hover{border-color:#A8CCC3;color:#CFE5DF}
 .h7:hover{background-color:rgba(241,230,212,.03)}
-.member-login{position:relative;display:flex;align-items:center;color:rgba(241,230,212,.45);transition:color .3s ease}
-.member-login:hover{color:#F1E6D4}
+.member-login{position:relative;display:flex;align-items:center;color:#F1E6D4;transition:color .3s ease}
+.member-login:hover{color:#CFE5DF}
 .member-login::after{content:attr(data-tooltip);position:absolute;right:0;top:calc(100% + 10px);background:#15100B;border:1px solid rgba(241,230,212,.14);color:#D8CBB8;font-size:12px;letter-spacing:.06em;white-space:nowrap;padding:8px 14px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:100}
 .member-login:hover::after{opacity:1}
