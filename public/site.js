@@ -9,7 +9,7 @@
       heatCast: S.tile === 'heat' ? .7 : 0, coldCast: S.tile === 'cold' ? .7 : 0,
       isPerform: p, isUnwind: !p,
       pOp: p ? 1 : 0, uOp: p ? 0 : 1, pCast: p ? .6 : 0, uCast: p ? 0 : .5, pScale: p ? 1 : 1.06, uScale: p ? 1.06 : 1,
-      doorTag: p ? 'Cold · 39–55°F' : 'Heat · 160–195°F',
+      doorTag: p ? 'Cold · 38–55°F' : 'Heat · 160–195°F',
       pColor: p ? '#F1E6D4' : 'rgba(241,230,212,.38)', uColor: p ? 'rgba(241,230,212,.38)' : '#F1E6D4',
       pLine: p ? '#A8CCC3' : 'rgba(241,230,212,.14)', uLine: p ? 'rgba(241,230,212,.14)' : '#A8CCC3',
       navBg: S.scrolled || S.menu ? 'rgba(13,10,7,.88)' : 'rgba(13,10,7,0)',

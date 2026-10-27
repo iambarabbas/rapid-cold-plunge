@@ -382,3 +382,10 @@ html,body{margin:0;background:#0D0A07;color:#F1E6D4;-webkit-font-smoothing:antia
 .member-login:hover{color:#CFE5DF}
 .member-login::after{content:attr(data-tooltip);position:absolute;right:0;top:calc(100% + 10px);background:#15100B;border:1px solid rgba(241,230,212,.14);color:#D8CBB8;font-size:12px;letter-spacing:.06em;white-space:nowrap;padding:8px 14px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:100}
 .member-login:hover::after{opacity:1}
+
+/* Preview strip */
+.preview-strip{position:fixed;top:61px;left:0;right:0;z-index:48;background:rgba(13,10,7,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(94,92,56,.4);text-align:center;padding:9px 20px}
+.preview-strip-inner{display:inline-flex;align-items:center;gap:10px;font-family:'Archivo',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#a8a870;text-decoration:none;transition:color .2s ease}
+.preview-strip-inner:hover{color:#F1E6D4}
+.preview-pulse{width:6px;height:6px;border-radius:50%;background:#5E5C38;flex-shrink:0;animation:ppulse 2s ease-in-out infinite}
+@keyframes ppulse{0%,100%{opacity:1}50%{opacity:.35}}

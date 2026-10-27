@@ -1,0 +1,6 @@
+name = "rapid-cold-plunge"
+pages_build_output_dir = "public"
+
+[[kv_namespaces]]
+binding = "RSVP_STORE"
+id = "dcac718e99bf45a1806afa896a9f945b"
