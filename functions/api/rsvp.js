@@ -1,3 +1,29 @@
+const MC_SERVER = 'us2';
+const MC_LIST_ID = '6fe538f47b';
+
+async function subscribeToMailchimp(member, apiKey) {
+  const { firstName, lastName, email, mobile, slot, howHeard } = member;
+  await fetch(`https://${MC_SERVER}.api.mailchimp.com/3.0/lists/${MC_LIST_ID}/members`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email_address: email.toLowerCase().trim(),
+      status: 'subscribed',
+      merge_fields: {
+        FNAME: firstName,
+        LNAME: lastName,
+        PHONE: mobile,
+        SLOT: SLOT_LABELS[slot] || slot,
+        HOWHEARD: howHeard || '',
+      },
+      tags: ['Preview Night'],
+    }),
+  });
+}
+
 const SLOTS = [
   'nov4-630','nov4-700','nov4-730',
   'nov11-630','nov11-700','nov11-730',
@@ -81,6 +107,13 @@ export async function onRequestPost({ request, env }) {
   const existing = JSON.parse(await env.RSVP_STORE.get(listKey) || '[]');
   existing.push({ firstName, lastName, email, mobile, guest: guest === 'yes', howHeard, ts: Date.now(), spots: guestCount });
   await env.RSVP_STORE.put(listKey, JSON.stringify(existing));
+
+  // Subscribe to Mailchimp (non-blocking — don't fail the RSVP if this errors)
+  // API key read from Cloudflare env secret MAILCHIMP_API_KEY
+  const mcKey = env.MAILCHIMP_API_KEY;
+  if (mcKey) {
+    subscribeToMailchimp({ firstName, lastName, email, mobile, slot, howHeard }, mcKey).catch(() => {});
+  }
 
   const slotLabel = SLOT_LABELS[slot];
   return json({
