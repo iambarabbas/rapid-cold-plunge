@@ -555,5 +555,41 @@
   });
 })();
 </script>
+<!--
+  RAPID – Founders Preview RSVP tracking (add-on, read-only)
+  Watches for #rsvp-success to appear (only after server confirms RSVP),
+  then fires a GA4 event and Zaraz track. Fails silently if anything goes wrong.
+-->
+<script>
+(function () {
+  try {
+    var box = document.getElementById('rsvp-success');
+    if (!box || !window.MutationObserver) return;
+
+    var sent = false;
+    function fire() {
+      if (sent) return;
+      sent = true;
+      try {
+        var slotEl = document.getElementById('slot');
+        var slot = slotEl ? slotEl.value : '';
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'form_preview_rsvp_submit', { rsvp_slot: slot });
+        }
+        if (window.zaraz && typeof window.zaraz.track === 'function') {
+          window.zaraz.track('rsvp_success', { rsvp_slot: slot });
+        }
+      } catch (e) {}
+    }
+
+    var obs = new MutationObserver(function () {
+      try {
+        if (box.style.display === 'block') { fire(); obs.disconnect(); }
+      } catch (e) {}
+    });
+    obs.observe(box, { attributes: true, attributeFilter: ['style'] });
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
